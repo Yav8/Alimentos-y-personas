@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Clase persona.
  * @author Javier de Cea Domínguez.
@@ -10,6 +12,7 @@ public class Persona {
     private int anos;
     private int totalCalorias;
     private boolean haSobrepasadoElLimite;
+    private ArrayList<Comida> listaDeComidas;
 
     /**
      * Constructor de la clase Persona.
@@ -27,6 +30,7 @@ public class Persona {
         this.anos = anos;
         totalCalorias = 0;
         haSobrepasadoElLimite = false;
+        listaDeComidas = new ArrayList<>();
     }
 
     /**
@@ -44,6 +48,7 @@ public class Persona {
         else {
             System.out.println("Error: La persona no puede comer más.");
         }
+        listaDeComidas.add(comida);
         return caloriasDeLaComida;
     }
 
@@ -80,5 +85,32 @@ public class Persona {
         }
         System.out.println(pregunta);
         return pregunta;
+    }
+    
+    /**
+     * Devuelve e imprime por pantalla el alimento con 
+     * mayor número de calorías.
+     * @return alimentoMasCalorico El nombre del alimento 
+     * con mayor número de calorías.
+     */
+    public String getAlimentoMasCaloricoConsumido() {
+        String alimentoMasCalorico = null;
+        int numeroCaloriaMasAlta = 0;
+        
+        for(Comida comida : listaDeComidas) {
+            if(numeroCaloriaMasAlta <= comida.getCalorias()) {
+                alimentoMasCalorico = comida.getNombre();
+                numeroCaloriaMasAlta = comida.getCalorias();
+            }
+        }
+        
+        if(alimentoMasCalorico != null) {            
+            System.out.println(alimentoMasCalorico);
+        }
+        else {
+            System.out.println("La persona no ha comido nada aun.");
+        }
+        
+        return alimentoMasCalorico;
     }
 }
